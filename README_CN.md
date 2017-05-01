@@ -1,32 +1,33 @@
 
 [![](https://dn-biezhi.qbox.me/LOGO_BIG.png)](http://bladejava.com)
 
+[开始使用](https://bladejava.com/docs)&nbsp; | &nbsp;[示例项目](https://github.com/blade-samples)&nbsp; | &nbsp;[贡献代码](https://bladejava.com/docs/appendix/contribute)&nbsp; | &nbsp;[捐赠](donate.md)&nbsp; | &nbsp;[FAQ](https://bladejava.com/docs/faqs) | &nbsp;[English](https://github.com/biezhi/blade/blob/master/README.md)
+
 [![Build Status](https://img.shields.io/travis/biezhi/blade.svg?style=flat-square)](https://travis-ci.org/biezhi/blade)
 [![maven-central](https://img.shields.io/maven-central/v/com.bladejava/blade-core.svg?style=flat-square)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.bladejava%22)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![@biezhi on weibo](https://img.shields.io/badge/weibo-%40biezhi-red.svg?style=flat-square)](http://weibo.com/u/5238733773)
 
-[English](https://github.com/biezhi/blade/blob/master/README.md)
-
 ## Blade是什么?
 
-Blade 是一个轻量级的MVC框架. 它拥有简洁的代码，优雅的设计。
-如果你喜欢,欢迎 [Star and Fork](https://github.com/biezhi/blade), 谢谢!
+Blade 是一款轻量级的MVC框架, 重新定义JavaWeb开发,它拥有简洁的代码，优雅的设计。
+
+如果你觉得不错, 欢迎 [Star](https://github.com/biezhi/blade/stargazers) / [Fork](https://github.com/biezhi/blade), 谢谢 :blush:
 
 ## 特性
 
-* [x] 轻量级。代码简洁,结构清晰,更容易开发
+* [x] 轻量级, 代码简洁,结构清晰,更容易开发
 * [x] 模块化(你可以选择使用哪些组件)
-* [x] 插件扩展机制
 * [x] Restful风格的路由接口
-* [x] 多种配置文件支持(当前支持properties、json和硬编码)
-* [x] 内置Jetty服务,模板引擎支持
-* [x] 支持JDK1.6或者更高版本
+* [x] 多种模板引擎支持
+* [x] 支持以jar文件发布运行
+* [x] JDK8以上
 
 ## 概述
 
 * 简洁的：框架设计简单,容易理解,不依赖于更多第三方库。Blade框架目标让用户在一天内理解并使用。
-* 优雅的：`blade` 支持 REST 风格路由接口, 提供 DSL 语法编写，无侵入式的拦截器。
+* 优雅的：`Blade` 支持 REST 风格路由接口, 提供 DSL 语法编写，无侵入式的拦截器。
+* 易部署：支持 `maven` 打成 `jar` 包直接运行。
 
 ## 快速入门
 
@@ -38,46 +39,42 @@ Blade 是一个轻量级的MVC框架. 它拥有简洁的代码，优雅的设计
 <dependency>
 	<groupId>com.bladejava</groupId>
 	<artifactId>blade-core</artifactId>
-	<version>1.6.0-beta1</version>
+	<version>1.7.2-beta</version>
 </dependency>
 <dependency>
-    <groupId>com.bladejava</groupId>
-    <artifactId>blade-startup</artifactId>
-    <version>1.0.1</version>
+	<groupId>com.bladejava</groupId>
+	<artifactId>blade-embed-jetty</artifactId>
+	<version>0.1.3</version>
 </dependency>
 ```
 
 或者  `Gradle`:
 
 ```sh
-compile 'com.bladejava:blade-core:1.6.0-beta1'
-compile 'com.bladejava:blade-startup:1.0.1'
+compile 'com.bladejava:blade-core:1.7.2-beta'
+compile 'com.bladejava:blade-embed-jetty:0.1.3'
 ```
 
 编写 `Main`函数：
 
 ```java
 public static void main(String[] args) {
-	Blade blade = me();
-	blade.get("/", (request, response) -> {
+	$().get("/", (request, response) -> {
 		response.html("<h1>Hello blade!</h1>");
-	});
-	blade.listen(9001).start();
+	}).start(Application.class);
 }
 ```
 
-用浏览器打开 http://localhost:9001 这样就可以看到第一个Blade应用了！
+用浏览器打开 http://localhost:9000 这样就可以看到第一个Blade应用了！
 
 ## API示例
 
 ```java
 public static void main(String[] args) {
-	Blade blade = me();
-	blade.get("/user/21", getxxx);
-	blade.post("/save", postxxx);
-	blade.delete("/del/21", deletexxx);
-	blade.put("/put", putxxx);
-	blade.listen(9001).start();
+	$().get("/user/21", getxxx);
+	$().post("/save", postxxx);
+	$().delete("/del/21", deletexxx);
+	$().put("/put", putxxx);
 }
 ```
 
@@ -85,20 +82,19 @@ public static void main(String[] args) {
 
 ```java
 public static void main(String[] args) {
-	Blade blade = me();
-	blade.get("/user/:uid", (request, response) -> {
-		Integer uid = request.paramAsInt("uid");
+	$().get("/user/:uid", (request, response) -> {
+		Integer uid = request.paramInt("uid");
 		response.text("uid : " + uid);
 	});
 	
-	blade.get("/users/:uid/post/:pid", (request, response) -> {
-		Integer uid = request.paramAsInt("uid");
-		Integer pid = request.paramAsInt("pid");
+	$().get("/users/:uid/post/:pid", (request, response) -> {
+		Integer uid = request.paramInt("uid");
+		Integer pid = request.paramInt("pid");
 		String msg = "uid = " + uid + ", pid = " + pid;
 		response.text(msg);
 	});
 	
-	blade.listen(9001).start();
+	$().start(Application.class);
 }
 ```
 
@@ -106,28 +102,20 @@ public static void main(String[] args) {
 
 ```java
 public static void main(String[] args) {
-	Blade blade = me();
-	blade.get("/user", (request, response) -> {
-		Integer uid = request.queryAsInt("uid");
+	$().get("/user", (request, response) -> {
+		Integer uid = request.queryInt("uid");
 		response.text("uid : " + uid);
-	});
-	blade.listen(9001).start();
+	}).start(Application.class);
 }
 ```
 
 ## 上传文件
 
 ```java
-public void upload_img(Request request, Response response){
-
-	FileItem[] fileItems = request.files();
-	if(null != fileItems && fileItems.length > 0){
-		
-		FileItem fileItem = fileItems[0];
+public void upload_img(@MultipartParam FileItem fileItem){
+	if(null != fileItem){
 		File file = fileItem.getFile();
-
 		String fileRealPath = "your upload file path!";
-		
 		nioTransferCopy(file, fileRealPath);
 	}
 }
@@ -149,46 +137,25 @@ POST	/upload_img			UploadRoute.upload_img
 
 ```java
 public static void main(String[] args) {
-	Blade blade = me();
-	blade.before("/.*", (request, response) -> {
+	$().before("/.*", (request, response) -> {
 		System.out.println("before...");
-	});
-	blade.listen(9001).start();
+	}).start(Application.class);
 }
 ```
 
-## DSL数据库操作
 
-```java
-// query
-List<Post> posts =
-	AR.find("where title like ? order by id desc limit ?,?", title, page, count).list(Post.class);
-
-// save
-String insertSql = "insert into t_post (title, content, view_count, create_time) values (?,?,?,?)";
-AR.update(insertSql, title, content, 0, new Date()).commit();
-
-// update
-AR.update("update t_post set title = ? and content = ? where id = ?",title, content, id).commit();
-
-// delete
-AR.update("delete from t_post where id = ?",id).commit()
-```
-
-OK，这一切看起来多么的简单，查阅使用指南更多现成的例子供你参考:
+这一切看起来多么的简单，不过上面的功能可是冰山一角，查看文档和示例项目有更多惊喜:
 
 + [hello工程](https://github.com/blade-samples/hello)
-+ [博客例子](https://github.com/blade-samples/blog)
-+ [API文档](http://bladejava.com/apidocs)
-+ [使用指南](http://bladejava.com/docs)
-+ [相关案例](https://github.com/blade-samples)
-+ [版本查询](LAST_VERSION.md)
++ [文档服务](https://github.com/biezhi/grice)
++ [更多例子](https://github.com/blade-samples)
 
-### 计划
+## 使用Blade的站点
 
-- 1. 添加测试代码
-- 2. 优化基础代码
-- 3. 优化并发能力
++ 博客系统：https://github.com/otale/tale
++ 论坛程序：https://java-china.org
++ 图片社交：https://github.com/biezhi/nice
++ SS面板：https://github.com/biezhi/ss-panel
 
 ## 更新日志
 
@@ -196,7 +163,7 @@ OK，这一切看起来多么的简单，查阅使用指南更多现成的例子
 
 ## 联系我
 
-- Blog:[https://biezhi.me](https://biezhi.me)
+- Blog:[http://biezhi.me](http://biezhi.me)
 - Mail: biezhi.me#gmail.com
 - Java交流群: [1013565](http://shang.qq.com/wpa/qunwpa?idkey=932642920a5c0ef5f1ae902723c4f168c58ea63f3cef1139e30d68145d3b5b2f)
 
@@ -217,4 +184,3 @@ OK，这一切看起来多么的简单，查阅使用指南更多现成的例子
 ## 开源协议
 
 请查看 [Apache License](LICENSE)
-

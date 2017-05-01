@@ -1,12 +1,12 @@
 /**
  * Copyright (c) 2015, biezhi 王爵 (biezhi.me@gmail.com)
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- * 	http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,43 +17,60 @@ package com.blade;
 
 /**
  * Const Interface
- * 
- * @author	<a href="mailto:biezhi.me@gmail.com" target="_blank">biezhi</a>
- * @since	1.0
+ * <p>
+ * <pre>
+ *     The basic configuration of the blade framework is stored
+ * </pre>
+ *
+ * @author <a href="mailto:biezhi.me@gmail.com" target="_blank">biezhi</a>
+ * @since 1.6.6
  */
 public interface Const {
 
-	/**
-	 * Current version
-	 */
-	String BLADE_VERSION = "1.6.0-beta1";
-	
-	/**
-     * Server 500 error HTML
+    /**
+     * the last blade framework version
      */
-	String INTERNAL_ERROR = "<html><head><title>500 Internal Error</title></head><body bgcolor=\"white\"><center><h1>500 Internal Error</h1></center><hr><center>blade "
-			+ BLADE_VERSION +"</center></body></html>";
-    
-	/**
-	 * Server 404 error HTML
-	 */
-	String VIEW_NOTFOUND = "<html><head><title>404 Not Found</title></head><body bgcolor=\"white\"><center><h1>[ %s ] Not Found</h1></center><hr><center>blade "
-			+ BLADE_VERSION +"</center></body></html>";
-	
-	/**
-	 * Default jetty server port
-	 */
-	int DEFAULT_PORT = 9000;
-	
-	/**
-	 * Request ThreadPoll context key
-	 */
-	String BLADE_EXECUTOR = "blade-req-executor";
-	
-	String BLADE_ROUTE = "blade.route";
-	String BLADE_IOC = "blade.ioc";
-	String BLADE_VIEW_404 = "blade.view404";
-	String BLADE_VIEW_500 = "blade.view500";
-	String BLADE_DEV = "blade.dev";
-	
+    String VERSION = "1.7.2-beta";
+
+    /**
+     * server 500
+     */
+    String VIEW_500 = "<html><head><title>500 Internal Error</title></head><body bgcolor=\"white\"><center><h1>500 Internal Error</h1></center><hr><center>blade " + VERSION + "</center></body></html>";
+
+    /**
+     * server 404
+     */
+    String VIEW_404 = "<html><head><title>404 Not Found</title></head><body bgcolor=\"white\"><center><h1>[ %s ] Not Found</h1></center><hr><center>blade " + VERSION + "</center></body></html>";
+
+    /**
+     * server 405
+     */
+    String VIEW_405 = "<html><head><title>403 Uri Forbidden</title></head><body bgcolor=\"white\"><center><h1>[ %s ] Method Not Allowed</h1></center><hr><center>blade " + VERSION + "</center></body></html>";
+
+    /**
+     * default web server port
+     */
+    int DEFAULT_PORT = 9000;
+
+    String DEFAULT_ENCODING = "UTF-8";
+
+    String DEFAULT_ROUTE_CONF = "route.conf";
+
+    /**** blade properties ****/
+    String JETTY_SERVER_CLASS = "com.blade.embedd.EmbedJettyServer";
+    String TOMCAT_SERVER_CLASS = "com.blade.embedd.EmbedTomcatServer";
+
+    String SERVER_PORT = "server.port";
+
+    String MVC_STATICS = "mvc.statics";
+    String MVC_VIEW_404 = "mvc.view.404";
+    String MVC_VIEW_500 = "mvc.view.500";
+    String HTTP_ENCODING = "http.encoding";
+
+    String APP_PROPERTIES = "app.properties";
+    String APP_DEV = "app.dev";
+    String APP_SCAN = "app.scan";
+    String APP_BASE_PKG = "app.base-package";
+    String APP_CLASSPATH = "app.classpath";
+
 }

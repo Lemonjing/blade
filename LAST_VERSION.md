@@ -16,6 +16,7 @@
  </repository>
 </repositories>
 ```
+
 和`dependencies`相同级别
 
 
@@ -24,7 +25,7 @@
 <dependency>
     <groupId>com.bladejava</groupId>
     <artifactId>blade-kit</artifactId>
-    <version>1.2.9-beta</version>
+    <version>1.4.1-beta</version>
 </dependency>
 ```
 
@@ -33,7 +34,25 @@
 <dependency>
     <groupId>com.bladejava</groupId>
     <artifactId>blade-core</artifactId>
-    <version>1.6.0-beta1</version>
+    <version>1.7.2-beta</version>
+</dependency>
+```
+
+## [blade-embed-jetty](http://search.maven.org/#search%7Cga%7C1%7Cblade-embed-jetty)
+```xml
+<dependency>
+    <groupId>com.bladejava</groupId>
+    <artifactId>blade-embed-jetty</artifactId>
+    <version>0.1.3</version>
+</dependency>
+```
+
+## [blade-template-jetbrick](http://search.maven.org/#search%7Cga%7C1%7Cblade-template-jetbrick)
+```xml
+<dependency>
+    <groupId>com.bladejava</groupId>
+    <artifactId>blade-template-jetbrick</artifactId>
+    <version>0.0.9</version>
 </dependency>
 ```
 
@@ -42,34 +61,7 @@
 <dependency>
     <groupId>com.bladejava</groupId>
     <artifactId>blade-jdbc</artifactId>
-    <version>0.0.1</version>
-</dependency>
-```
-
-## [blade-cache](http://search.maven.org/#search%7Cga%7C1%7Cblade-cache)
-```xml
-<dependency>
-    <groupId>com.bladejava</groupId>
-    <artifactId>blade-cache</artifactId>
-    <version>1.2.3</version>
-</dependency>
-```
-
-## [blade-redis](http://search.maven.org/#search%7Cga%7C1%7Cblade-redis)
-```xml
-<dependency>
-    <groupId>com.bladejava</groupId>
-    <artifactId>blade-redis</artifactId>
-    <version>1.2.3</version>
-</dependency>
-```
-
-## [blade-startup](http://search.maven.org/#search%7Cga%7C1%7Cblade-startup)
-```xml
-<dependency>
-    <groupId>com.bladejava</groupId>
-    <artifactId>blade-startup</artifactId>
-    <version>1.0.1</version>
+    <version>0.1.6-alpha</version>
 </dependency>
 ```
 
@@ -78,15 +70,7 @@
 <dependency>
     <groupId>com.bladejava</groupId>
     <artifactId>blade-patchca</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.5</version>
 </dependency>
 ```
 
-## [blade-oauth2](http://search.maven.org/#search%7Cga%7C1%7Cblade-oauth2)
-```xml
-<dependency>
-    <groupId>com.bladejava</groupId>
-    <artifactId>blade-oauth2</artifactId>
-    <version>1.0.2</version>
-</dependency>
-```

@@ -3,60 +3,59 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
+	
 	<parent>
 		<groupId>com.bladejava</groupId>
-		<artifactId>blade-root</artifactId>
+		<artifactId>blade</artifactId>
 		<version>1.0</version>
 	</parent>
 
 	<artifactId>blade-core</artifactId>
 	<packaging>jar</packaging>
-	<version>${blade.version}</version>
+	<version>${blade-core.version}</version>
 	<name>blade-core</name>
 	<url>https://github.com/biezhi/blade/blade-core</url>
-
-	<properties>
-		<jetty.version>9.2.12.v20150709</jetty.version>
-		<httpclient.version>4.3.5</httpclient.version>
-		<slf4j.version>1.7.7</slf4j.version>
-	</properties>
-
+	
 	<dependencies>
 		<dependency>
-			<groupId>com.bladejava</groupId>
-			<artifactId>blade-kit</artifactId>
-			<version>1.2.9-beta</version>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 		</dependency>
-		<!-- <dependency>
-			<groupId>com.bladejava</groupId>
-			<artifactId>blade-aop</artifactId>
-			<version>0.0.1</version>
-			<scope>provided</scope>
-		</dependency> -->
+		
+		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+				
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>blade-kit</artifactId>
+			<version>${blade-kit.version}</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
+			<version>${servlet.version}</version>
 		</dependency>
-						
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>${jetty.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-webapp</artifactId>
-			<version>${jetty.version}</version>
-			<scope>provided</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
-
 	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.flf</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+
 </project>
